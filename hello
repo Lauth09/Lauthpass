@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Protected Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="content-section" class="hidden">
+    <h1>Hello! How are you today?</h1>
+    <button onclick="copyText()">Copy</button>
+  </div>
+
+  <script>
+    const correctPassword = "26102009";
+
+    function requestPassword() {
+      const inputPassword = prompt("Please enter the password:");
+      if (inputPassword === correctPassword) {
+        document.getElementById("content-section").classList.remove("hidden");
+      } else {
+        alert("Incorrect password. Please refresh the page and try again.");
+        requestPassword(); // Gọi lại để yêu cầu nhập lại mật khẩu
+      }
+    }
+
+    function copyText() {
+      const text = "Hello! How are you today?";
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Text copied to clipboard!");
+      }).catch(() => {
+        alert("Failed to copy text.");
+      });
+    }
+
+    // Yêu cầu mật khẩu ngay khi vào trang
+    requestPassword();
+  </script>
+</body>
+</html>
